@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   title: "Calender app",
-  description: "calender app by tarun",
+  description: "calender event mangement app by tarun kushwaha",
 };
 
 export default function RootLayout({ children }) {
