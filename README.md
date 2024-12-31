@@ -1,36 +1,101 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Event Manager Application
 
-## Getting Started
+This repository contains an **Event Manager Application**, developed by me. The application allows users to manage events with features such as adding, editing, deleting, searching, and sorting events. Data persistence is handled through the browser's `localStorage`, ensuring user data remains available across sessions.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### 1. Event Management
+- **Add Events**: Users can create new events by specifying details like event name and category (e.g., work, personal, etc.).
+- **Edit Events**: Existing events can be edited directly from the Event Page.
+- **Delete Events**: Events can be removed. If all events for a specific date are deleted, the date is automatically removed from the event list.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Search Functionality
+- **Search by Event Name**: Users can search for events using a search bar. The results are displayed dynamically, showing the matching events.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### 3. Sorting
+- **Sort by Category**: Events can be sorted based on their category, helping users quickly organize their tasks.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 4. Data Persistence
+- **LocalStorage Integration**: All event data is stored in `localStorage`, ensuring persistence across page reloads or browser restarts.
 
-## Learn More
+### 5. Drag-and-Drop Feature
+- **Move Events Across Dates**: Users can drag and drop events between dates, providing a flexible way to manage schedules.
+ **note** : drag works ony on calender page but can be added on event page if needed.
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Application Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Context Provider (`ContextProvider`)
+The application uses React Context API to manage the state globally. It provides functions and state variables for event management, including:
 
-## Deploy on Vercel
+- **`events`**: Object storing events, categorized by date.
+- **`selectedDate`**: Currently selected date for managing events.
+- **`handleAddEvent`**: Adds a new event to the selected date.
+- **`handleEditEvent`**: Opens a modal for editing an existing event.
+- **`handleDeleteEvent`**: Removes an event and cleans up the date if no events remain.
+- **`handleSearch`**: Filters events based on user queries.
+- **`handleSortByCategory`**: Sorts events by their category.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Pages
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+#### 1. **Calendar Page**
+- Displays a monthly calendar.
+- Users can click on a date to view or manage events for that specific date.
+
+#### 2. **Event Page**
+- Displays all events grouped by date.
+- Allows users to edit or delete events.
+- Includes a sorting dropdown for organizing events by category.
+
+## Installation and Setup
+
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd event-manager
+   ```
+3. Install dependencies:
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
+4. Start the development server:
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
+5. Open the application in your browser at `http://localhost:3000`.
+
+---
+
+## Technology Stack
+- **React**: Next js with react for building the UI.
+- **Context API**: For state management across components.
+- **Tailwind CSS**: For responsive and modern styling.
+- **LocalStorage**: For data persistence.
+
+---
+
+## How to Use
+
+1. **Calendar View**: 
+   - Navigate through months using the "Previous" and "Next" buttons.
+   - Click on a specific date to manage events for that day.
+
+2. **Event Management**:
+   - Add new events using the input fields and dropdowns.
+   - Edit or delete events directly from the Event Page.
+
+3. **Search and Sort**:
+   - Use the search bar to find events by name.
+   - Use the category dropdown to sort events.
+
+## Creator
+- **Tarun**: Tarun kumar kushwaha.
+
+
