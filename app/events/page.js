@@ -6,6 +6,7 @@ import Modal from "@/components/Modal";
 const EventPage = () => {
   const {
     events,
+    selectedDate,
     setSelectedDate,
   } = useAppContext();
   const [modalopen, setmodalopen] = useState(false);
@@ -25,6 +26,8 @@ const EventPage = () => {
   };
 
   const filteredEvents = filterEventsByCategory(events, selectedCategory);
+
+  console.log(filteredEvents["2024-12-2"])
 
   return (
     <>
@@ -52,7 +55,7 @@ const EventPage = () => {
             <div key={date} className="p-4 border rounded shadow">
               <h2 className="text-xl font-semibold mb-2">{date}</h2>
               <ul>
-                {filteredEvents[date].map((event, index) => (
+                {filteredEvents[date] && filteredEvents[date].map((event, index) => (
                   <li
                     key={index}
                     className="flex justify-between items-center mb-2"
@@ -92,4 +95,3 @@ const EventPage = () => {
 };
 
 export default EventPage;
-
