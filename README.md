@@ -1,6 +1,6 @@
 # Event Manager Application
 
-This repository contains an **Event Manager Application**, developed by me. The application allows users to manage events with features such as adding, editing, deleting, searching, and sorting events. Data persistence is handled through the browser's `localStorage`, ensuring user data remains available across sessions.
+This repository contains an **Event Manager Application**, developed by me. The application allows users to manage events with features such as adding, editing, deleting, searching, and sorting events. Data persistence is handled through the browser's `localStorage`, ensuring user data remains available across sessions. Data can be exported to CSV file.
 
 live link -  https://taruncalenderapp.vercel.app/
 
@@ -24,6 +24,8 @@ live link -  https://taruncalenderapp.vercel.app/
 - **Move Events Across Dates**: Users can drag and drop events between dates, providing a flexible way to manage schedules.
  **note** : drag works ony on calender page but can be added on event page if needed.
 
+### 6. CSV file export
+- **papaparse Integration**: papaparse is used to export file to csv.
 
 ## Application Structure
 

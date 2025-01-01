@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { useAppContext } from "@/context/AuthContext";
 import Modal from "@/components/Modal";
+import DownloadCSV from "@/components/DownloadCSV";
 
 const EventPage = () => {
   const {
@@ -55,18 +56,21 @@ const EventPage = () => {
         <h1 className="text-2xl text-center text-sky-800 font-bold ">Events</h1>
 
         {/* Category Filter */}
-        <div className="flex justify-end mb-4 ">
-          <label className="mr-2 text-lg font-medium">Filter by Category:</label>
-          <select
-            value={selectedCategory}
-            onChange={(e) => setSelectedCategory(e.target.value)}
-            className="px-4 py-2 border rounded text-sm"
-          >
-            <option value="all">All</option>
-            <option value="work">Work</option>
-            <option value="personal">Personal</option>
-            <option value="other">Other</option>
-          </select>
+        <div className="flex justify-between mb-4 ">
+          <DownloadCSV />
+          <div>
+            <label className="mr-2 text-lg font-medium">Filter by Category:</label>
+            <select
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
+              className="px-4 py-2 border rounded text-sm"
+            >
+              <option value="all">All</option>
+              <option value="work">Work</option>
+              <option value="personal">Personal</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
         </div>
 
         {/* Events List */}
