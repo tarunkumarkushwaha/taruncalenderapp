@@ -2,6 +2,8 @@
 
 This repository contains an **Event Manager Application**, developed by me. The application allows users to manage events with features such as adding, editing, deleting, searching, and sorting events. Data persistence is handled through the browser's `localStorage`, ensuring user data remains available across sessions.
 
+live link -  https://taruncalenderapp.vercel.app/
+
 ## Features
 
 ### 1. Event Management
