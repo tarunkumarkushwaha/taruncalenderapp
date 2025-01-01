@@ -62,7 +62,8 @@ const Calender = () => {
                                     <span
                                         draggable
                                         onDragStart={(e) => {
-                                            handleDragStart(e, event, dateKey)}}
+                                            handleDragStart(e, event, dateKey)
+                                        }}
                                         className="block text-center text-xs text-green-500">Events</span>
                                 )}
                             </div>
@@ -77,11 +78,36 @@ const Calender = () => {
                 <div className="mb-4">
                     <h2 className="text-lg font-bold">Search Results</h2>
                     <ul>
-                        {searchResults.map((result, index) => (
-                            <li key={index} className="mb-2">
-                                <span className="text-gray-800">{result.event}</span> on {result.date}
-                            </li>
-                        ))}
+                        {/* Events List */}
+                        <div className="grid gap-4 bg-white rounded-lg">
+                            {Object.keys(events).map((date) => (
+                                <div key={date} className="p-4 border rounded shadow">
+                                    <h2 className="text-xl font-semibold mb-2">{date}</h2>
+                                    <ul>
+                                        {events[date] && events[date].map((event, index) => (
+                                            <li
+                                                key={index}
+                                                className="flex justify-between items-center mb-2 p-2  rounded-md "
+                                            >
+                                                <span
+                                                    className={`text-gray-800 min-w-60 bg-slate-200 border-2 text-lg px-4 py-1 rounded-md ${event.category === "work"
+                                                        ? "text-red-500"
+                                                        : event.category === "personal"
+                                                            ? "text-green-500"
+                                                            : "text-blue-500"
+                                                        }`}
+                                                >
+                                                    {index + 1}. {event.name}
+                                                </span>
+                                                
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            ))}
+                        </div>
+
+
                     </ul>
                 </div>
             )}

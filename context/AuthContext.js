@@ -8,14 +8,14 @@ export const ContextProvider = ({ children }) => {
   const [selectedDate, setSelectedDate] = useState('2024-12-1');
   const [modalContent, setModalContent] = useState({ type: "add", event: "", category: "" });
   const [searchQuery, setSearchQuery] = useState(""); // For search query
-  const [searchResults, setSearchResults] = useState([]); // search result
+  const [searchResults, setSearchResults] = useState({}); // search result
   useEffect(() => {
     // Save events to local storage whenever they change
     if (Object.keys(events).length > 0) {
       localStorage.setItem("events", JSON.stringify(events));
     }
-  }, [events,selectedDate]);
-  
+  }, [events, selectedDate]);
+
   useEffect(() => {
     // Load events from local storage on initial render
     const data = localStorage.getItem("events");
@@ -28,7 +28,7 @@ export const ContextProvider = ({ children }) => {
       }
     }
   }, []);
-  
+
 
   const today = new Date();
   const [currentMonth, setCurrentMonth] = useState(today.getMonth());
@@ -73,7 +73,7 @@ export const ContextProvider = ({ children }) => {
       const updatedEvents = events[selectedDate].filter((_, i) => i !== index);
       // console.log(index)
       const updatedEventsObject = { ...events };
-  
+
       // Update or remove the date key
       if (updatedEvents.length > 0) {
         updatedEventsObject[selectedDate] = updatedEvents;
@@ -83,26 +83,34 @@ export const ContextProvider = ({ children }) => {
       localStorage.setItem("events", JSON.stringify(updatedEventsObject));
       setEvents(updatedEventsObject);
     }
-    
-  };  
+
+  };
 
   const handleSearch = (input) => {
-    const results = [];
-    if (input == "") {
+    const results = {}; 
+    if (input === "") {
       setSearchResults(results);
-      return
+      return;
     }
+  
     for (const date in events) {
       events[date].forEach((event) => {
         if (event.name.toLowerCase().includes(input.toLowerCase())) {
-          results.push({ date, event: event.name });
+          // Check if the date already exists in results
+          if (!results[date]) {
+            results[date] = [];
+          }
+          results[date].push({
+            name: event.name,
+            category: event.category,
+          });
         }
-        else { results.push({ event: "no events found so" }); }
       });
     }
+  
     setSearchResults(results);
-    // console.log(results)
   };
+  
 
   const handleDragStart = (event, draggedEvent, dateKey) => {
     event.dataTransfer.setData(
@@ -119,7 +127,7 @@ export const ContextProvider = ({ children }) => {
     const updatedSourceEvents = events[dateKey]
     setEvents({
       ...events,
-      [dateKey] :"",
+      [dateKey]: "",
       [targetDate]: updatedSourceEvents,
     });
   };

@@ -6,18 +6,21 @@ import Modal from "@/components/Modal";
 const EventPage = () => {
   const {
     events,
-    selectedDate,
+    setSearchResults,
+    searchResults,
     setSelectedDate,
   } = useAppContext();
   const [modalopen, setmodalopen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("all");
 
-  const filterEventsByCategory = (events, category) => {
-    if (category === "all") return events;
+  // console.log(searchResults)
 
+  const filterEventsByCategory = (eve, category) => {
+    
+    if (category === "all") return events;
     const filteredEvents = {};
-    Object.keys(events).forEach((date) => {
-      const filtered = events[date].filter((event) => event.category === category);
+    Object.keys(eve).forEach((date) => {
+      const filtered = eve[date] && eve[date].filter((event) => event.category === category);
       if (filtered.length > 0) {
         filteredEvents[date] = filtered;
       }
@@ -25,9 +28,26 @@ const EventPage = () => {
     return filteredEvents;
   };
 
-  const filteredEvents = filterEventsByCategory(events, selectedCategory);
+  const filterEventsBySearch = (eve, category) => {
+    if (category === "all") return eve;
 
-  console.log(filteredEvents["2024-12-2"])
+    const filteredEvents = {};
+    Object.keys(eve).forEach((date) => {
+      const filtered = eve[date] && eve[date].filter((event) => event.category === category);
+      if (filtered.length > 0) {
+        filteredEvents[date] = filtered;
+      }
+    });
+    return filteredEvents;
+  };
+
+  const filteredEvents =
+     Object.keys(searchResults).length > 0 
+    ? filterEventsBySearch(searchResults, selectedCategory)  
+    :
+    filterEventsByCategory(events, selectedCategory)
+
+  // console.log(searchResults, "log")
 
   return (
     <>
@@ -51,24 +71,24 @@ const EventPage = () => {
 
         {/* Events List */}
         <div className="grid gap-4 bg-white rounded-lg">
-          {Object.keys(filteredEvents).map((date) => (
+          {Object.keys(filteredEvents).length > 0 && Object.keys(filteredEvents).map((date) => (
             <div key={date} className="p-4 border rounded shadow">
               <h2 className="text-xl font-semibold mb-2">{date}</h2>
               <ul>
                 {filteredEvents[date] && filteredEvents[date].map((event, index) => (
                   <li
                     key={index}
-                    className="flex justify-between items-center mb-2"
+                    className="flex justify-between items-center mb-2 p-2  rounded-md "
                   >
                     <span
-                      className={`text-gray-800 bg-slate-200 border-2 text-xl px-4 py-1 rounded-md ${event.category === "work"
-                          ? "border-red-500"
-                          : event.category === "personal"
-                            ? "border-green-500"
-                            : "border-blue-500"
+                      className={`text-gray-800 min-w-60 bg-slate-200 border-2 text-xl px-4 py-1 rounded-md ${event.category === "work"
+                        ? "border-red-500"
+                        : event.category === "personal"
+                          ? "border-green-500"
+                          : "border-blue-500"
                         }`}
                     >
-                     {index + 1}. {event.name}
+                      {index + 1}. {event.name}
                     </span>
                     <div className="flex gap-2">
                       <button
