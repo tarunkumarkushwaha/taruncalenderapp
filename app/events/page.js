@@ -16,7 +16,7 @@ const EventPage = () => {
   // console.log(searchResults)
 
   const filterEventsByCategory = (eve, category) => {
-    
+
     if (category === "all") return events;
     const filteredEvents = {};
     Object.keys(eve).forEach((date) => {
@@ -42,10 +42,10 @@ const EventPage = () => {
   };
 
   const filteredEvents =
-     Object.keys(searchResults).length > 0 
-    ? filterEventsBySearch(searchResults, selectedCategory)  
-    :
-    filterEventsByCategory(events, selectedCategory)
+    Object.keys(searchResults).length > 0
+      ? filterEventsBySearch(searchResults, selectedCategory)
+      :
+      filterEventsByCategory(events, selectedCategory)
 
   // console.log(searchResults, "log")
 
@@ -71,7 +71,7 @@ const EventPage = () => {
 
         {/* Events List */}
         <div className="grid gap-4 bg-white rounded-lg">
-          {Object.keys(filteredEvents).length > 0 && Object.keys(filteredEvents).map((date) => (
+          {Object.keys(filteredEvents).length > 0 ? Object.keys(filteredEvents).map((date) => (
             <div key={date} className="p-4 border rounded shadow">
               <h2 className="text-xl font-semibold mb-2">{date}</h2>
               <ul>
@@ -106,7 +106,16 @@ const EventPage = () => {
                 ))}
               </ul>
             </div>
-          ))}
+          ))
+            :
+            <p
+              className={`text-gray-800 my-10 text-center min-w-60 bg-slate-200 border-2 text-xl px-4 py-1 rounded-md 
+                       
+                        `}
+            >
+              no events found
+            </p>
+          }
         </div>
         <Modal isOpen={modalopen} onClose={() => setmodalopen(false)} />
       </div>

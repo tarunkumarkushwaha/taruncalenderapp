@@ -21,7 +21,7 @@ const Navbar = () => {
     { href: "/events", label: "Events" },
   ];
 
-  // Handle clicks outside the search container
+  // Handle clicks outside the search containr
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (containerRef.current && !containerRef.current.contains(event.target)) {
